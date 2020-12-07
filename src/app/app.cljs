@@ -2,6 +2,8 @@
   (:require [keechma.next.controllers.router]
             [keechma.next.controllers.dataloader]
             [keechma.next.controllers.subscription]
+            [app.controllers.feed]
+            [app.controllers.article]
             ["react-dom" :as rdom]))
 
 (defn page-eq? [page] (fn [{:keys [router]}] (= page (:page router))))
@@ -15,8 +17,13 @@
 (def app
   {:keechma.subscriptions/batcher rdom/unstable_batchedUpdates,
    :keechma/controllers
-   {:router {:keechma.controller/params true,
-             :keechma.controller/type :keechma/router,
-             :keechma/routes [["" {:page "home"}] ":page" ":page/:subpage"]},
-    :dataloader {:keechma.controller/params true,
-                 :keechma.controller/type :keechma/dataloader}}})
+                                  {:router     {:keechma.controller/params true,
+                                                :keechma.controller/type   :keechma/router,
+                                                :keechma/routes            [["" {:page "home"}] ":page" ":page/:subpage"]},
+                                   :dataloader {:keechma.controller/params true,
+                                                :keechma.controller/type   :keechma/dataloader}
+                                   :feed       #:keechma.controller {:deps   [:entitydb :dataloader :router]
+                                                                     :params (fn [{:keys [router]}]
+                                                                               (= "home" (:page router)))}
+                                   :article    #:keechma.controller {:deps   [:entitydb :dataloader :router]
+                                                                     :params true}}})
