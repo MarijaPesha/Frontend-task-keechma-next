@@ -6,17 +6,21 @@ Hiring task for frontend developers of most levels
 This is a list of tasks that are scattered around the code, a more formalized approach should be taken in presenting those tasks and this list might better be omitted from the official testing.
 
 List of possible tasks from simple to complex:
-0. Register for Guardian API and add it to the settings.cljs file (could be instructions)
+
+0. Register for the Guardian API and add it to the `settings.cljs` file (could be instructions)
 1. Change Site Title
-2. Change Site Favicon
-3. Change Occurrences of Lime colour into Teal
+2. Change Site Favicon (could be some simple icon provided by us)
+3. Change occurrences of Lime colour into Teal
 4. Check the `get-education` API endpoint and fix it
-5. Add a footer to the Article.cljs and Home.cljs pages (bonus points, make it a reusable component)
+5. Add a footer to the `Article.cljs` and `Home.cljs` pages
+5.1. Make it a reusable component
+5.2. Keep responsive design in mind
 6. Move the Preloader component to a separate file
 7. Add and style a simple 404 page
+7.1. Keep responsive styles in mind
 8. Use the DRY principle and optimize `navbar.cljs` component links 
 9. Use the DRY principle and optimize the `article.cljs` controller
-10. Use the DRY principle and optimize the API calls
+10. Add parameters to the API calls 
 
 ## Code Related Information
 ---
