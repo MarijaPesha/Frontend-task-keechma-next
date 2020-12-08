@@ -44,7 +44,7 @@
                                    :className "flex justify-between items-center w-full border-b border-gray-500 py-6"
                                    :onClick   #(router/redirect! props :router {:page "article" :id (:id item)})}
 
-                                  (d/img {:className "w-16 h-16 md:w-32 md:h-32  object-cover"
+                                  (d/img {:className "w-16 h-16 md:w-32 md:h-32  object-cover border-r-4 border-b-4 border-lime-400"
                                           :src       (get-in item [:fields :thumbnail] "https://picsum.photos/200")})
                                   (d/div {:className "cursor-pointer text-left w-3/4 ml-4"}
                                          (d/h3 {:className "inline text-base md:text-xl border-b-4  border-lime-500"} (:webTitle item))

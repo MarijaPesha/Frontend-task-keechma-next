@@ -18,7 +18,7 @@
                    (d/img {:src (get-in article-data [:fields :thumbnail])
                            :className "object-cover w-full"}))
             (d/div {:class "bg-gray-100 flex flex-1 flex-col items-start justify-start px-6 md:px-12 w-full md:w-3/5 mx-auto shadow-xl py-12"}
-                   (d/div {:className "text-2xl w-full text-center py-6 border-b border-gray-500"}
+                   (d/div {:className "text-2xl w-full text-center py-6 border-b-2 border-lime-500"}
                         (:webTitle article-data))
 
                    (d/div {:className "mt-6 text-justify"}

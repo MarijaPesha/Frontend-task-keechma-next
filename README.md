@@ -1,9 +1,24 @@
-## VBT Stuff
+## VBT TASK REPO
 
-**Foreword** 
+Hiring task for frontend developers of most levels
 
-_Purpose of this repo is to test out a project structure, development processes and workflows to determine the template which best suits our day-to-day needs in the agency - one can expect breaking changes will be introduced until we work out the kinks_
+### Available tasks
+This is a list of tasks that are scattered around the code, a more formalized approach should be taken in presenting those tasks and this list might better be omitted from the official testing.
 
+List of possible tasks from simple to complex:
+0. Register for Guardian API and add it to the settings.cljs file (could be instructions)
+1. Change Site Title
+2. Change Site Favicon
+3. Change Occurrences of Lime colour into Teal
+4. Check the `get-education` API endpoint and fix it
+5. Add a footer to the Article.cljs and Home.cljs pages (bonus points, make it a reusable component)
+6. Move the Preloader component to a separate file
+7. Add and style a simple 404 page
+8. Use the DRY principle and optimize `navbar.cljs` component links 
+9. Use the DRY principle and optimize the `article.cljs` controller
+10. Use the DRY principle and optimize the API calls
+
+## Code Related Information
 ---
 ### Basics
 1. Change the name of the project in `package.json`
@@ -11,93 +26,6 @@ _Purpose of this repo is to test out a project structure, development processes 
 3. Update CODEOWNERS file accordingly (with project leads)
 
 ---
-
-### Release Management
-
-Idea behind this setup is to automate as much workflow as possible, while trying to reduce human error to minimum.
-Releasing, tagging and changelog updates are done via Git Actions when `push to master` occurs. Outcome is determined
-by comparing closed Pull Requests that have happened since last tag was made. Some defaults are implemented, but can
-be further fine-tuned by leveraging PR label mechanism.
-
-#### Tagging and Releasing
- * Based on [Semver](http://semver.org/)
- * Flexible version bumping scheme with a project default or overrides using Pull Request Labels
- * Creates Release Notes automatically (with a list of commits since the last release)
- * PR labels `release:major`, `release:minor` and `release:patch` determine the Semver version bump (`major.minor.patch`)
- * Closed PR's since last Tag are used for consideration
- * default is `release:minor`
-
- Workflow examples:
-
- ```
-       v1.0.0     v1.1.0                   v1.1.1
-        |          |                        |
- - - ---o----------o------------------------o     master branch
-                    \                      /
-                     \                    /    PR [release:patch]
-                      \                  /
-                       o--------o-------o     bug-fix-branch
-```
-
- ```
-       v1.0.0     v1.1.0                                         v2.0.0
-        |          |                                              |
- - - ---o----------o----------------------------------------------o     master branch
-                    \                                            /
-                     \                                          /     merge ** // see footnote
-                      \                                        /
-                       o------------o-------------------------o     feature-foo
-                        \          /                         /
-                         \        /  PR [release:patch]     /
-                          \      /                         /
-                           o----o  feature-foo-1          /
-                            \                            /
-                             \                          /     PR [release:major]
-                              \                        /
-                               o----------------------o     feature-foo-2
-```
-** merge - _since all the PR's are used for consideration, the one made to commit code to master would also be used (with no labels applied, default [minor] would be used which could influence the final outcome)_
-
- 
-#### Changelog Generator
- * based on [Github Changelog Generator](https://github.com/github-changelog-generator/github-changelog-generator)
- * Generates a changelog file based on tags, issues and merged pull requests (and splits them into separate lists according to labels)
- * Labels `bug`, `enhancement` and `documentation` are used to sort changes in sections, others are grouped together
-
-Workflow example:
- ```
-       v1.0.0     v1.1.0                                                     v2.0.0
-        |          |                                                          |
- - - ---o----------o----------------------------------------------------------o     master branch
-                    \                                                        /
-                     \                                                      /
-                      \                                                    /
-                       o------------o-------------------------------------o     feature-foo
-                        \          /                                     /
-                         \        /  PR [release:minor enhancement]     /
-                          \      /                                     /
-                           o----o  feature-foo-1                      /
-                            \                                        /
-                             \                                      /     PR [release:major bug]
-                              \                                    /
-                               o----------------------------------o     feature-foo-2
-``` 
-
-```
-v2.0.0 (2020-08-17)
-Full Changelog
-
-Implemented enhancements:
-
-feature-foo-1 #1 (tiborkr)
-
-Fixed bugs:
-
-feature-foo-2 #2 (tiborkr)
-```
-
----
-
 ## Available Scripts
 
 In the project directory, you can run:
@@ -107,9 +35,6 @@ In the project directory, you can run:
 Runs the app in development mode.<br>
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 The page will reload if you make edits.
-
-The app uses [Reagent](https://reagent-project.github.io), a minimalistic interface between ClojureScript and React.<br>
-You can use existing npm React components directly via a [interop call](http://reagent-project.github.io/docs/master/InteropWithReact.html#creating-reagent-components-from-react-components).
 
 Builds use [Shadow CLJS](https://github.com/thheller/shadow-cljs) for maximum compatibility with NPM libraries. You'll need a [Java SDK](https://adoptopenjdk.net/) (Version 8+, Hotspot) to use it. <br>
 You can [import npm libraries](https://shadow-cljs.github.io/docs/UsersGuide.html#js-deps) using Shadow CLJS. See the [user manual](https://shadow-cljs.github.io/docs/UsersGuide.html) for more information.
