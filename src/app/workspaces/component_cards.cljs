@@ -18,9 +18,9 @@
     (.setAttribute app-div "id" "testing-lib")
     (js/document.body.appendChild app-div)))
 
-(ws/defcard button-teal
+(ws/defcard button-lime
             {::wsm/card-width 2, ::wsm/card-height 3}
-            (react-card (d/button {:class "btn btn-teal"} " Button ")))
+            (react-card (d/button {:class "btn btn-lime"} " Button ")))
 
 (defnc ClickCounterRenderer []
   (let [[count set-count] (hooks/use-state 0)]

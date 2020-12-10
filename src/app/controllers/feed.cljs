@@ -17,7 +17,7 @@
                    "education" (api/get-education nil)
                    "sport" (api/get-sport nil)
                    nil (api/get-feed nil))
-                 (pp/swap! state* assoc :feed (get-in value [:response :results])))
+                 (pp/swap! state* assoc :results (get-in value [:response :results])))
       (pp/set-queue :feed-data))
   )
 
@@ -31,5 +31,5 @@
   (pipelines/register ctrl pipelines))
 
 (defmethod ctrl/derive-state :feed [_ state {:keys [entitydb]}]
-  (select-keys state [:feed])
+  (select-keys state [:results])
   )

@@ -13,24 +13,19 @@ List of possible tasks from simple to complex:
 3. Change occurrences of Lime colour into Teal
 4. Check the `get-education` API endpoint and fix it
 5. Add a footer to the `Article.cljs` and `Home.cljs` pages
-5.1. Make it a reusable component
-5.2. Keep responsive design in mind
+    1. Make it a reusable component
+    2. Keep responsive design in mind
 6. Move the Preloader component to a separate file
 7. Add and style a simple 404 page
-7.1. Keep responsive styles in mind
+    1. Keep responsive styles in mind
 8. Use the DRY principle and optimize `navbar.cljs` component links 
 9. Use the DRY principle and optimize the `article.cljs` controller
-10. Add parameters to the API calls 
+10. Add parameters to the API calls
+11. On the homepage, hovering on an article should show a popover preview of the article limited to 200 characters 
 
 ## Code Related Information
----
-### Basics
-1. Change the name of the project in `package.json`
-2. Run `git config core.hooksPath .githooks` to set `pre-commit` hooks (yarn lint and yarn format)
-3. Update CODEOWNERS file accordingly (with project leads)
 
----
-## Available Scripts
+### Available Scripts
 
 In the project directory, you can run:
 
