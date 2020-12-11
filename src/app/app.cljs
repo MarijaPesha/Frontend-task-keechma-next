@@ -4,6 +4,7 @@
             [keechma.next.controllers.subscription]
             [app.controllers.feed]
             [app.controllers.article]
+            [app.controllers.theme]
             ["react-dom" :as rdom]))
 
 (defn page-eq? [page] (fn [{:keys [router]}] (= page (:page router))))
@@ -26,4 +27,10 @@
                                                                      :params (fn [{:keys [router]}]
                                                                                (= "home" (:page router)))}
                                    :article    #:keechma.controller {:deps   [:entitydb :dataloader :router]
-                                                                     :params true}}})
+                                                                     :params true}
+
+                                   :theme      #:keechma.controller {:params true
+                                                                     :deps   [:entitydb :router]
+                                                                     }
+
+                                   }})

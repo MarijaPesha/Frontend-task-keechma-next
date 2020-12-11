@@ -4,5 +4,5 @@
 /* purgecss end ignore */
 @import "tailwindcss/utilities";
 * {
-transition: all .15s ease-in-out;
+transition: background-color .15s ease-in-out;
 }
