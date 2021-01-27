@@ -10,7 +10,7 @@
 
 (derive :article ::pipelines/controller)
 
-;;TASK DRY
+;; TASK DRY
 (def pipelines
   {:keechma.on/start (pipeline! [value {:keys [deps-state* state*] :as ctrl}]
                                 (api/get-article (get-in @deps-state* [:router :id]))

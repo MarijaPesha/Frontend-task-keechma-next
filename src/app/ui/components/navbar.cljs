@@ -17,7 +17,7 @@
                           (d/p "Very Big")
                           (d/p {:className "lg:ml-2 text-xl font-bold"}
                                "News"))
-                     ;;TASK DRY
+                     ;; TASK DRY
                      (d/a {:className "border-b-4 dark:border-black border-gray-900 dark:hover:border-lime-300 hover:border-lime-300 pt-1 transition ease-in-out duration-200"
                            :href      (router/get-url props :router {:page "home" :subpage "tech"})}
                           "Tech")

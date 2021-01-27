@@ -12,7 +12,7 @@
 
 (defclassified HomepageWrapper :div "font-open-sans h-screen w-screen flex flex-col bg-gray-200 overflow-x-hidden overflow-y-scroll dark:bg-gray-900 dark:text-gray-100")
 
-;;TASK componentize preloader
+;; TASK componentize preloader
 (defnc Preloader [props]
        (d/div {:className "dark:bg-gray-900 bg-gray-200 w-screen h-screen overflow-hidden flex items-center justify-center"}
               (d/img {:width  "128"
