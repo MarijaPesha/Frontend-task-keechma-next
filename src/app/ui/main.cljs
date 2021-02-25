@@ -4,8 +4,7 @@
             [helix.core :as hx :refer [$]]
             [helix.dom :as d]
             [app.ui.pages.home :refer [Home]]
-            [app.ui.pages.article :refer [Article]]
-            ))
+            [app.ui.pages.article :refer [Article]]))
 
 
 ;; TASK move navbar here DRY

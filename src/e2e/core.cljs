@@ -10,11 +10,11 @@
               (let [server (.createServer
                             http
                             #(serve-handler %1 %2 #js {:public "public/"}))]
-                {:before #(.listen server 5000), :after #(.close server)}))
+                {:before #(.listen server 5000) :after #(.close server)}))
 
 ; Change debug to true to see the browser performing actions.
 (def debug false)
-(def browser-opts (if debug #js {:headless false, :observe true} #js {}))
+(def browser-opts (if debug #js {:headless false :observe true} #js {}))
 
 (deftest app-works
   (let [test-string "is running!"]

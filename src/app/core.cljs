@@ -9,9 +9,9 @@
 
 (defonce app-instance* (atom nil))
 
-(defn render
-  []
-  (when-let [app-instance @app-instance*] (keechma/stop! app-instance))
+(defn render []
+  (when-let [app-instance @app-instance*]
+    (keechma/stop! app-instance))
   (let [app-instance (keechma/start! app)]
     (reset! app-instance* app-instance)
     (rdom/render ($ react/StrictMode

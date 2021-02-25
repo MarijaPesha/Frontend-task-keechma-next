@@ -102,7 +102,8 @@
   [v _ _]
   (if (not (not-empty? v nil nil))
     true
-    (let [n (js/parseFloat v 10)] (and (< 0 n) (>= 100 n)))))
+    (let [n (js/parseFloat v 10)]
+      (and (< 0 n) (>= 100 n)))))
 
 (defn bool? [v _ _] (if (nil? v) true (or (= true v) (= false v))))
 
@@ -131,70 +132,80 @@
 
 (defn password-confirmation
   [_ data _]
-  (let [pass (get-in data [:enrollInfo :owner :password])
+  (let [pass              (get-in data [:enrollInfo :owner :password])
         pass-confirmation (get-in data [:enrollInfo :owner :password2])]
     (if (some nil? [pass pass-confirmation]) true (= pass pass-confirmation))))
 
 (defn cardholder-name
   [_ data _]
-  (let [nonce (:paypal-nonce data)
+  (let [nonce           (:paypal-nonce data)
         cardholder-name (:cardholder-name data)]
     (if nonce true (not-empty? cardholder-name _ _))))
 
 
 (def default-validations
-  {:not-empty {:message "Please enter a value.", :validator not-empty?},
-   :true {:message "Please select a value.", :validator #(true? %1)},
-   :wrong-access-token {:message "Please enter a valid access-token.",
-                        :validator (fn [_ _ _] true)},
-   :bool {:message "Please select a value.", :validator bool?},
-   :url {:message "Please enter a valid URL.", :validator url?},
-   :email {:message "Please enter a valid email.", :validator email?},
-   :edu-email {:message "Please enter a valid .edu email.",
-               :validator edu-email?},
-   :email-confirmation {:message "Email doesn't match email confirmation.",
-                        :validator
-                        (fn [_ data _]
-                          (let [email (:email data)
-                                email-confirmation (:email-confirmation data)]
-                            (if (some nil? [email email-confirmation])
-                              true
-                              (= email email-confirmation))))},
-   :email-same {:message "Please enter an email different from old email.",
-                :validator (fn [_ data _]
-                             (let [email (:email data)
-                                   email-old (:email-old data)]
-                               (if (some nil? [email email-old])
-                                 true
-                                 (not= email email-old))))},
-   :us-state {:message "Please select state",
-              :validator
-              (fn [v data _]
-                (let [country (:country data)]
-                  (not (and (= "United States" country)
-                            (or (= "State *" v) (nil? v) (empty? v))))))},
-   :password-confirmation {:message "Passwords don't match.",
-                           :validator password-confirmation},
-   :ok-password {:message "Password must contain at least 8 characters.",
-                 :validator ok-password?},
-   :numeric {:message "Please enter a number.", :validator numeric?},
-   :numeric-with-decimal {:message "Value is not a valid type",
-                          :validator numeric-with-decimal?},
-   :phone {:message "Please enter a valid phone number.", :validator phone?},
-   :valid-us-state {:message "Please enter an US state",
-                    :validator valid-us-state?},
-   :valid-zipcode {:message "Please enter a valid zip code.",
-                   :validator valid-zipcode?},
-   :valid-country {:message "Please enter a valid country.",
-                   :validator valid-country?},
-   :valid-cardholder {:message "Please enter a cardholder name.",
-                      :validator cardholder-name},
-   :0> {:message "Please enter a value bigger than 0.",
-        :validator
-        (fn [v _ _]
-          (if (not (not-empty? v nil nil)) true (< 0 (js/parseFloat v))))},
-   :0>100 {:message "Please enter a value between 0 and 100.",
-           :validator number0>100?}})
+  {:not-empty             {:message   "Please enter a value."
+                           :validator not-empty?}
+   :true                  {:message   "Please select a value."
+                           :validator #(true? %1)}
+   :wrong-access-token    {:message   "Please enter a valid access-token."
+                           :validator (fn [_ _ _] true)}
+   :bool                  {:message "Please select a value." :validator bool?}
+   :url                   {:message "Please enter a valid URL." :validator url?}
+   :email                 {:message   "Please enter a valid email."
+                           :validator email?}
+   :edu-email             {:message   "Please enter a valid .edu email."
+                           :validator edu-email?}
+   :email-confirmation    {:message   "Email doesn't match email confirmation."
+                           :validator (fn [_ data _]
+                                        (let [email (:email data)
+                                              email-confirmation
+                                                    (:email-confirmation data)]
+                                          (if (some nil?
+                                                [email email-confirmation])
+                                            true
+                                            (= email email-confirmation))))}
+   :email-same            {:message
+                                      "Please enter an email different from old email."
+                           :validator (fn [_ data _]
+                                        (let [email     (:email data)
+                                              email-old (:email-old data)]
+                                          (if (some nil? [email email-old])
+                                            true
+                                            (not= email email-old))))}
+   :us-state              {:message   "Please select state"
+                           :validator (fn [v data _]
+                                        (let [country (:country data)]
+                                          (not (and (= "United States" country)
+                                                 (or (= "State *" v)
+                                                   (nil? v)
+                                                   (empty? v))))))}
+   :password-confirmation {:message   "Passwords don't match."
+                           :validator password-confirmation}
+   :ok-password           {:message
+                                      "Password must contain at least 8 characters."
+                           :validator ok-password?}
+   :numeric               {:message   "Please enter a number."
+                           :validator numeric?}
+   :numeric-with-decimal  {:message   "Value is not a valid type"
+                           :validator numeric-with-decimal?}
+   :phone                 {:message   "Please enter a valid phone number."
+                           :validator phone?}
+   :valid-us-state        {:message   "Please enter an US state"
+                           :validator valid-us-state?}
+   :valid-zipcode         {:message   "Please enter a valid zip code."
+                           :validator valid-zipcode?}
+   :valid-country         {:message   "Please enter a valid country."
+                           :validator valid-country?}
+   :valid-cardholder      {:message   "Please enter a cardholder name."
+                           :validator cardholder-name}
+   :0>                    {:message   "Please enter a value bigger than 0."
+                           :validator (fn [v _ _]
+                                        (if (not (not-empty? v nil nil))
+                                          true
+                                          (< 0 (js/parseFloat v))))}
+   :0>100                 {:message   "Please enter a value between 0 and 100."
+                           :validator number0>100?}})
 
 (def validations$ (atom default-validations))
 
@@ -205,14 +216,14 @@
 (defn get-validator-message
   [validation-key]
   (or (get-in @validations$ [validation-key :message])
-      "Value failed validation."))
+    "Value failed validation."))
 
 (defn to-validator
   "Helper function that extracts the validator definitions."
   [config]
   (v/validator
-   (reduce-kv
-    (fn [m attr v]
-      (assoc m attr (map (fn [k] [k (get-in @validations$ [k :validator])]) v)))
-    {}
-    config)))
+    (reduce-kv
+      (fn [m attr v]
+        (assoc m attr (map (fn [k] [k (get-in @validations$ [k :validator])]) v)))
+      {}
+      config)))

@@ -19,7 +19,7 @@
     (js/document.body.appendChild app-div)))
 
 (ws/defcard button-lime
-            {::wsm/card-width 2, ::wsm/card-height 3}
+            {::wsm/card-width 2 ::wsm/card-height 3}
             (react-card (d/button {:class "btn btn-lime"} " Button ")))
 
 (defnc ClickCounterRenderer []
@@ -33,7 +33,7 @@
 
 (ws/deftest click-counter-tests-card
   (let [element ($ ClickCounterRenderer)
-        tr (render element #js {:container (testing-container)})]
+        tr      (render element #js {:container (testing-container)})]
     (is (.queryByText tr #"has value: 0")
         "Should show the initial value as '0'")
     (.click fireEvent (.queryByText tr #"(?i)click me"))
