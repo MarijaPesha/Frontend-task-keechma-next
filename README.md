@@ -7,7 +7,7 @@ Hiring task for frontend developers of most levels
 
 Follow the instructions and register for `developer` [guardian API key](https://open-platform.theguardian.com/access/).
 Once obtained, replace `<YOUR GUARDIAN API KEY HERE>` in `app.settings/api-key` file.
-Refer to the [API docs](https://open-platform.theguardian.com/documentation/search) when needed.
+Refer to the [API docs](https://open-platform.theguardian.com/documentation) when needed.
 
 ### Available tasks
 This is a list of tasks that are scattered around the code, a more formalized approach should be taken in presenting those
@@ -62,6 +62,7 @@ List of possible tasks from simple to advanced:
     - ideally you want to set up controllers in such fashion that they're alive for the purpose of their intended use
     - you can specify other controllers they depend on in `:keechma.controller/deps` key, and based on them come up with the causality you need    
 14. Implement `Search` page with knowledge from before (note: this includes form controller which hasn't been covered, ask for instructions for now)
+    - [API docs](https://open-platform.theguardian.com/documentation/search)
     + create a new page called `Search`
     + create two parts of the page: one which contains the form used for search, and the other which will list the results
     + create a new form controller file which will handle the form and declare it in `app` map
