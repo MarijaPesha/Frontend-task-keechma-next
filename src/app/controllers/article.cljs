@@ -18,7 +18,8 @@
                              (api/get-article (get-in @deps-state* [:router :id]))
                              (pp/swap! state* assoc :data (get-in value [:response :content])))})
 
-(defmethod ctrl/prep :article [ctrl] (pipelines/register ctrl pipelines))
+(defmethod ctrl/prep :article [ctrl]
+  (pipelines/register ctrl pipelines))
 
 (defmethod ctrl/derive-state :article
   [_ state {:keys [entitydb]}]
