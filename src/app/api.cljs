@@ -18,7 +18,7 @@
 
 ;; TASK WRONG API
 (defn get-education [req]
-  (GET (str api-url "search?show-fields=thumbnail&q='tech'&api-key=" api-key)
+  (GET (str api-url "search?show-fields=thumbnail&q='education'&api-key=" api-key)
     config))
 
 (defn get-sport [req]
