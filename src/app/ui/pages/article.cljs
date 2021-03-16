@@ -6,7 +6,9 @@
             [keechma.next.helix.lib :refer [defnc]]
             [keechma.next.helix.classified :refer [defclassified]]
             [app.ui.components.navbar :refer [Navbar]]
-            [app.ui.components.header :refer [Header]]))
+            [app.ui.components.header :refer [Header]]
+         ;; [app.ui.components.navbar :refer [Footer]]
+            ))
 
 (defclassified ArticleWrapper :div "font-open-sans h-screen w-screen flex flex-col bg-gray-200 dark:bg-gray-900 dark:text-gray-100 overflow-x-hidden overflow-y-scroll")
 
