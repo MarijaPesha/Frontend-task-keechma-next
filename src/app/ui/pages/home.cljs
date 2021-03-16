@@ -44,9 +44,9 @@
                   (d/div {:className "relative"}
                     (d/img {:className "w-16 h-16 md:w-32 md:h-32 z-50 relative object-cover"
                             :src       (get-in item [:fields :thumbnail] "https://picsum.photos/200")})
-                    (d/div {:className "absolute w-16 h-16 md:w-32 md:h-32 bg-lime-500 top-0 left-0 z-10 transform translate-y-1 translate-x-1"}))
+                    (d/div {:className "absolute w-16 h-16 md:w-32 md:h-32 bg-teal-500 top-0 left-0 z-10 transform translate-y-1 translate-x-1"}))
                   (d/div {:className "cursor-pointer text-left w-3/4 ml-4"}
-                    (d/h3 {:className "inline text-base md:text-xl border-b-4 border-lime-500"}
+                    (d/h3 {:className "inline text-base md:text-xl border-b-4 border-teal-500"}
                       (:webTitle item))
                     (d/p {:className "dark:text-gray-400 text-gray-700 text-sm mt-4"}
                       (:sectionName item)

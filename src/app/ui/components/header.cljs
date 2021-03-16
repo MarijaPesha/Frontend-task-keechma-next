@@ -18,7 +18,7 @@
 (defnc Headline [{:keys [link title]}]
   ($ HeadlineOverlay
     (d/a {:href      link
-          :className "bg-lime-400 px-1 py-1"
+          :className "bg-teal-400 px-1 py-1"
           :style     {:-webkit-box-decoration-break "clone"
                       :box-decoration-break         "clone"}}
       title)))
