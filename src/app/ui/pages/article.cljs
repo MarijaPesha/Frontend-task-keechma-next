@@ -7,7 +7,7 @@
             [keechma.next.helix.classified :refer [defclassified]]
             [app.ui.components.navbar :refer [Navbar]]
             [app.ui.components.header :refer [Header]]
-         ;; [app.ui.components.navbar :refer [Footer]]
+            [app.ui.components.footer :refer [Footer]]
             ))
 
 (defclassified ArticleWrapper :div "font-open-sans h-screen w-screen flex flex-col bg-gray-200 dark:bg-gray-900 dark:text-gray-100 overflow-x-hidden overflow-y-scroll")
@@ -23,6 +23,8 @@
         (d/div {:className "text-2xl w-full text-center py-6 border-b-2 border-teal-500"}
           (:webTitle article-data))
         (d/div {:className "mt-6 text-justify"}
-          (get-in article-data [:blocks :body 0 :bodyTextSummary]))))))
+          (get-in article-data [:blocks :body 0 :bodyTextSummary])))
+       ($ Footer)
+       )))
 
 (def Article (with-keechma ArticleRenderer))

@@ -8,7 +8,9 @@
     ;;[keechma.next.helix.template :refer [defnt fill-slot configure]]
             [keechma.next.helix.classified :refer [defclassified]]
             [app.ui.components.navbar :refer [Navbar]]
-            [app.ui.components.header :refer [Header]]))
+            [app.ui.components.header :refer [Header]]
+            [app.ui.components.footer :refer [Footer]]
+            ))
 
 (defclassified HomepageWrapper :div
   "font-open-sans h-screen w-screen flex flex-col bg-gray-200 overflow-x-hidden overflow-y-scroll dark:bg-gray-900 dark:text-gray-100")
@@ -52,6 +54,8 @@
                       (:sectionName item)
                       " | "
                       (:webPublicationDate item)))))
-              (nthrest feed-data 5))))))))
+              (nthrest feed-data 5)))))
+              ($ Footer)
+              )))
 
 (def Home (with-keechma HomeRenderer))
