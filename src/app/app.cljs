@@ -17,7 +17,7 @@
                                    :feed       #:keechma.controller {:deps   [:entitydb :dataloader :router]
                                                                      :params (fn [{:keys [router]}]
                                                                                (= "home" (:page router)))}
-                                   :article    #:keechma.controller {:deps   [:entitydb :dataloader :router]
+                                   :article    #:keechma.controller {:deps   [:entitydb :router]
                                                                      :params true}
                                    :theme      #:keechma.controller {:params true
                                                                      :deps   [:entitydb :router]}}})

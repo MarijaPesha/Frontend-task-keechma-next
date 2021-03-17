@@ -10,17 +10,25 @@
 (derive :article ::pipelines/controller)
 
 ;; TASK DRY
+ 
+ (def get-pipeline
+   (pipeline! [value {:keys [deps-state* state*] :as ctrl}]
+              (api/get-article (get-in @deps-state* [:router :id]))
+              (pp/swap! state* assoc :data (get-in value [:response :content]))))
+
 (def pipelines
-  {:keechma.on/start       (pipeline! [value {:keys [deps-state* state*] :as ctrl}]
-                             (api/get-article (get-in @deps-state* [:router :id]))
-                             (pp/swap! state* assoc :data (get-in value [:response :content])))
-   :keechma.on/deps-change (pipeline! [value {:keys [deps-state* state*] :as ctrl}]
-                             (api/get-article (get-in @deps-state* [:router :id]))
-                             (pp/swap! state* assoc :data (get-in value [:response :content])))})
+  {:keechma.on/start        get-pipeline
+    ;;                      (pipeline! [value {:keys [deps-state* state*] :as ctrl}]
+    ;;                      (api/get-article (get-in @deps-state* [:router :id]))
+    ;;                      (pp/swap! state* assoc :data (get-in value [:response :content])))
+   :keechma.on/deps-change  get-pipeline
+    ;;                      (pipeline! [value {:keys [deps-state* state*] :as ctrl}]
+    ;;                      (api/get-article (get-in @deps-state* [:router :id]))
+    ;;                      (pp/swap! state* assoc :data (get-in value [:response :content])))})
+                              })
 
 (defmethod ctrl/prep :article [ctrl]
   (pipelines/register ctrl pipelines))
 
-(defmethod ctrl/derive-state :article
-  [_ state {:keys [entitydb]}]
-  (select-keys state [:data]))
+(defmethod ctrl/derive-state :article [_ state {:keys [entitydb]}]
+    (select-keys state [:data]))
