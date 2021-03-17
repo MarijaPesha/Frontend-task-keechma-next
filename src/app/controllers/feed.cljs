@@ -11,11 +11,12 @@
 
 (def get-data-pipeline
   (-> (pipeline! [value {:keys [state* deps-state*] :as ctrl}]
+                 
         (case (get-in @deps-state* [:router :subpage])
-          "tech" (api/get-tech nil)
-          "education" (api/get-education nil)
-          "sport" (api/get-sport nil)
-          nil (api/get-feed nil))
+          "tech"      (api/get-tech {:show-fields "thumbnail" :q "tech"})
+          "education" (api/get-education {:show-fields "thumbnail" :q "education"})
+          "sport"     (api/get-sport {:show-fields "thumbnail" :q "sport"})
+          nil         (api/get-feed nil))
         (pp/swap! state* assoc :results (get-in value [:response :results])))
       (pp/set-queue :feed-data)))
 
