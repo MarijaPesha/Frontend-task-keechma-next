@@ -6,7 +6,7 @@
             [app.ui.pages.home :refer [Home]]
             [app.ui.pages.article :refer [Article]]
             [app.ui.components.error :refer [Error404]]
-            ;; [clojure.core.match :refer [match]]
+            [clojure.core.match :refer [match]]
             ))
 
 
@@ -15,9 +15,9 @@
 ;; TASK 404 PAGE
 (defnc MainRenderer [props]
   (let [{:keys [page]} (use-sub props :router)]
-    (case page
+    (match page
       "home" ($ Home)
       "article" ($ Article)
-      ($ Error404))))
+      :else ($ Error404))))
 
 (def Main (with-keechma MainRenderer))
