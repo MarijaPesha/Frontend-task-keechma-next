@@ -5,20 +5,22 @@
             [keechma.next.controllers.pipelines :refer [get-promise]]
             [keechma.next.controllers.router :as router]
             [keechma.next.helix.lib :refer [defnc]]
-    ;;[keechma.next.helix.template :refer [defnt fill-slot configure]]
+  ;;        [keechma.next.helix.template :refer [defnt fill-slot configure]]
             [keechma.next.helix.classified :refer [defclassified]]
             [app.ui.components.navbar :refer [Navbar]]
             [app.ui.components.header :refer [Header]]
             [app.ui.components.footer :refer [Footer]]
+            [app.ui.components.preloader :refer [Preloader]]
             ))
 
 (defclassified HomepageWrapper :div
   "font-open-sans h-screen w-screen flex flex-col bg-gray-200 overflow-x-hidden overflow-y-scroll dark:bg-gray-900 dark:text-gray-100")
 
 ;; TASK componentize preloader
-(defnc Preloader [props]
-  (d/div {:className "dark:bg-gray-900 bg-gray-200 w-screen h-screen overflow-hidden flex items-center justify-center"}
-    (d/img {:width "128" :height "128" :alt "Loading" :src "images/loader.svg"})))
+;; (defnc Preloader [props]
+;; (d/div {:className "dark:bg-gray-900 bg-gray-200 w-screen h-screen overflow-hidden flex items-center justify-center"}
+;; (d/img {:width "128" :height "128" :alt "Loading" :src "images/loader.svg"})))
+;; `Preloader` extracted to component `preloader.cljs`
 
 (defnc HomeRenderer [props]
   (let [feed-data      (:results (use-sub props :feed))
