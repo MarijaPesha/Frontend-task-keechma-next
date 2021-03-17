@@ -4,7 +4,10 @@
             [helix.core :as hx :refer [$]]
             [helix.dom :as d]
             [app.ui.pages.home :refer [Home]]
-            [app.ui.pages.article :refer [Article]]))
+            [app.ui.pages.article :refer [Article]]
+            [app.ui.components.error :refer [Error404]]
+            ;; [clojure.core.match :refer [match]]
+            ))
 
 
 ;; TASK move navbar here DRY
@@ -15,6 +18,6 @@
     (case page
       "home" ($ Home)
       "article" ($ Article)
-      (d/div "404"))))
+      ($ Error404))))
 
 (def Main (with-keechma MainRenderer))
