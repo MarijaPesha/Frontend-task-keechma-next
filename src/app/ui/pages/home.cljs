@@ -1,7 +1,7 @@
 (ns app.ui.pages.home
   (:require [helix.dom :as d]
             [helix.core :as hx :refer [$ <>]]
-            [keechma.next.helix.core :refer [with-keechma use-sub use-meta-sub]]
+            [keechma.next.helix.core :refer [with-keechma use-sub use-meta-sub dispatch]]
             [keechma.next.controllers.pipelines :refer [get-promise]]
             [keechma.next.controllers.router :as router]
             [keechma.next.helix.lib :refer [defnc]]
@@ -26,7 +26,9 @@
   (let [feed-data      (:results (use-sub props :feed))
         feed-data-meta (use-meta-sub props :feed)
         loading-feed   (get-promise feed-data-meta :feed-data)
-        subpage        (:subpage (use-sub props :router))]
+        subpage        (:subpage (use-sub props :router))
+        article-tooltip (use-sub props :article-tooltip)]
+    
     ($ HomepageWrapper
       ($ Navbar)
       (if loading-feed
@@ -45,14 +47,15 @@
               (fn [item]
                 (d/div {:key       (:id item)
                         :className "tooltip flex justify-between items-center w-full border-b border-gray-500 py-6"
-                        :onClick   #(router/redirect! props :router {:page "article" :id (:id item)})}  
+                        :onClick   #(router/redirect! props :router {:page "article" :id (:id item)})
+                        :onMouseEnter #(dispatch props :article-tooltip :load-article-tooltip {:article-id (:id item)})}  
                   (d/div {:className "relative"}
                     (d/img {:className "w-16 h-16 md:w-32 md:h-32 z-50 relative object-cover"
                             :src       (get-in item [:fields :thumbnail] "https://picsum.photos/200")})
                          
                     (d/div {:className "absolute w-16 h-16 md:w-32 md:h-32 bg-teal-500 top-0 left-0 z-10 transform translate-y-1 translate-x-1"}))
                   (d/div {:className "cursor-pointer text-left w-3/4 ml-4"}
-                         (d/span {:className "tooltiptext text-center"} "Tooltip")
+                         (d/span {:className "tooltiptext text-center"} (str article-tooltip  " ..."))
                     (d/h3 {:className "inline text-base md:text-xl border-b-4 border-teal-500"}
                       (:webTitle item))
                     (d/p {:className "dark:text-gray-400 text-gray-700 text-sm mt-4"}

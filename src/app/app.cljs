@@ -4,6 +4,7 @@
             [keechma.next.controllers.subscription]
             [app.controllers.feed]
             [app.controllers.article]
+            [app.controllers.article-tooltip]
             [app.controllers.theme]
             ["react-dom" :as rdom]))
 
@@ -19,5 +20,7 @@
                                                                                (= "home" (:page router)))}
                                    :article    #:keechma.controller {:deps   [:entitydb :router]
                                                                      :params true}
+                                   :article-tooltip    #:keechma.controller {:deps   [:entitydb :router]
+                                                                              :params true}
                                    :theme      #:keechma.controller {:params true
                                                                      :deps   [:entitydb :router]}}})
