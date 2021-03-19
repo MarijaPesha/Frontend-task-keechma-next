@@ -23,12 +23,13 @@
 ;; `Preloader` extracted to component `preloader.cljs`
 
 (defnc HomeRenderer [props]
-  (let [feed-data      (:results (use-sub props :feed))
-        feed-data-meta (use-meta-sub props :feed)
-        loading-feed   (get-promise feed-data-meta :feed-data)
-        subpage        (:subpage (use-sub props :router))
-        article-tooltip (use-sub props :article-tooltip)]
-    
+  (let 
+        [feed-data      (:results (use-sub props :feed)) ;; data pospremljena u state kontrolera
+        feed-data-meta  (use-meta-sub props :feed)
+        loading-feed    (get-promise feed-data-meta :feed-data)
+        subpage         (:subpage (use-sub props :router))
+        article-tooltip (use-sub props :article-tooltip) ] ;; task 12. pospremanje data u EntityDB
+        
     ($ HomepageWrapper
       ($ Navbar)
       (if loading-feed
@@ -52,7 +53,6 @@
                   (d/div {:className "relative"}
                     (d/img {:className "w-16 h-16 md:w-32 md:h-32 z-50 relative object-cover"
                             :src       (get-in item [:fields :thumbnail] "https://picsum.photos/200")})
-                         
                     (d/div {:className "absolute w-16 h-16 md:w-32 md:h-32 bg-teal-500 top-0 left-0 z-10 transform translate-y-1 translate-x-1"}))
                   (d/div {:className "cursor-pointer text-left w-3/4 ml-4"}
                          (d/span {:className "tooltiptext text-center"} (str article-tooltip  " ..."))

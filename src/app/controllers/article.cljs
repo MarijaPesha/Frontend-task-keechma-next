@@ -21,7 +21,7 @@
     ;;                      (pipeline! [value {:keys [deps-state* state*] :as ctrl}]
     ;;                      (api/get-article (get-in @deps-state* [:router :id]))
     ;;                      (pp/swap! state* assoc :data (get-in value [:response :content])))
-   :keechma.on/deps-change  get-pipeline
+    ;; keechma.on/deps-change  get-pipeline
     ;;                      (pipeline! [value {:keys [deps-state* state*] :as ctrl}]
     ;;                      (api/get-article (get-in @deps-state* [:router :id]))
     ;;                      (pp/swap! state* assoc :data (get-in value [:response :content])))})

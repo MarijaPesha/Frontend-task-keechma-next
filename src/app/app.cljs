@@ -13,6 +13,9 @@
    :keechma/controllers           {:router     {:keechma.controller/params true
                                                 :keechma.controller/type   :keechma/router
                                                 :keechma/routes            [["" {:page "home"}] ":page" ":page/:subpage"]}
+                                   :entitydb {:keechma.controller/params true
+                                              :keechma.controller/type   :keechma/entitydb
+                                              :keechma.entitydb/schema   {}}
                                    :dataloader {:keechma.controller/params true
                                                 :keechma.controller/type   :keechma/dataloader}
                                    :feed       #:keechma.controller {:deps   [:entitydb :dataloader :router]
@@ -21,6 +24,6 @@
                                    :article    #:keechma.controller {:deps   [:entitydb :router]
                                                                      :params true}
                                    :article-tooltip    #:keechma.controller {:deps   [:entitydb :router]
-                                                                              :params true}
+                                                                             :params true}
                                    :theme      #:keechma.controller {:params true
                                                                      :deps   [:entitydb :router]}}})

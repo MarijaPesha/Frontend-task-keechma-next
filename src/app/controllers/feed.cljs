@@ -22,7 +22,7 @@
 
 (def pipelines
   {:keechma.on/start       get-data-pipeline
-   :keechma.on/deps-change get-data-pipeline
+   ;;:keechma.on/deps-change get-data-pipeline
    :keechma.on/stop        (pipeline! [_ ctrl])})
 
 (defmethod ctrl/prep :feed [ctrl] (pipelines/register ctrl pipelines))
