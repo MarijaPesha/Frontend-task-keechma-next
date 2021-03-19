@@ -11,6 +11,7 @@
             [app.ui.components.header :refer [Header]]
             [app.ui.components.footer :refer [Footer]]
             [app.ui.components.preloader :refer [Preloader]]
+            [keechma.next.toolbox.logging :as l]
             ))
 
 (defclassified HomepageWrapper :div
@@ -24,11 +25,15 @@
 
 (defnc HomeRenderer [props]
   (let 
-        [feed-data      (:results (use-sub props :feed)) ;; data pospremljena u state kontrolera
-        feed-data-meta  (use-meta-sub props :feed)
-        loading-feed    (get-promise feed-data-meta :feed-data)
-        subpage         (:subpage (use-sub props :router))
-        article-tooltip (use-sub props :article-tooltip) ] ;; task 12. pospremanje data u EntityDB
+        [
+         feed-data      (use-sub props :feed)
+         rute           (use-sub props :router)
+    ;; (l/pp "rute" rute)
+    ;;  feed-data       (:results (use-sub props :feed)) ;; data pospremljena u state kontrolera
+         feed-data-meta  (use-meta-sub props :feed)
+         loading-feed    (get-promise feed-data-meta :feed-data)
+         subpage         (:subpage (use-sub props :router))
+         article-tooltip (use-sub props :article-tooltip) ] ;; task 12. pospremanje data u EntityDB
         
     ($ HomepageWrapper
       ($ Navbar)

@@ -5,7 +5,8 @@
             [keechma.next.controllers.dataloader :as dl]
             [keechma.next.controllers.router :as router]
             [keechma.pipelines.core :as pp :refer-macros [pipeline!]]
-            [app.api :as api]))
+            [app.api :as api]
+            [keechma.next.toolbox.logging :as l]))
 
 (derive :feed ::pipelines/controller)
 
@@ -17,16 +18,23 @@
           "education" (api/get-education {:show-fields "thumbnail" :q "education"})
           "sport"     (api/get-sport {:show-fields "thumbnail" :q "sport"})
           nil         (api/get-feed nil))
-        (pp/swap! state* assoc :results (get-in value [:response :results])))
-      (pp/set-queue :feed-data)))
+        (edb/insert-collection! ctrl :entitydb :article-feed :results (get-in value [:response :results]) )
+     ;; (l/pp "value in ctrl" value)      
+     ;;  (pp/swap! state* assoc :results (get-in value [:response :results])) ;; state na controller-u
+                 )
+      (pp/set-queue :feed-data)
+      ))
 
 (def pipelines
   {:keechma.on/start       get-data-pipeline
-   ;;:keechma.on/deps-change get-data-pipeline
+;; :keechma.on/deps-change get-data-pipeline
    :keechma.on/stop        (pipeline! [_ ctrl])})
 
 (defmethod ctrl/prep :feed [ctrl] (pipelines/register ctrl pipelines))
 
-(defmethod ctrl/derive-state :feed
+#_(defmethod ctrl/derive-state :feed
   [_ state {:keys [entitydb]}]
   (select-keys state [:results]))
+
+(defmethod ctrl/derive-state :feed [_ state {:keys [entitydb]}]
+ (edb/get-collection entitydb :results))

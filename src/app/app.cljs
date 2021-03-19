@@ -20,7 +20,8 @@
                                                 :keechma.controller/type   :keechma/dataloader}
                                    :feed       #:keechma.controller {:deps   [:entitydb :dataloader :router]
                                                                      :params (fn [{:keys [router]}]
-                                                                               (= "home" (:page router)))}
+                                                                               (when (= "home" (:page router))
+                                                                                 (select-keys router [:page :subpage])))}
                                    :article    #:keechma.controller {:deps   [:entitydb :router]
                                                                      :params true}
                                    :article-tooltip    #:keechma.controller {:deps   [:entitydb :router]
