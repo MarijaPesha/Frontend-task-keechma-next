@@ -23,7 +23,8 @@
                                                                                (when (= "home" (:page router))
                                                                                  (select-keys router [:page :subpage])))}
                                    :article    #:keechma.controller {:deps   [:entitydb :router]
-                                                                     :params true}
+                                                                     :params (fn [{:keys [router]}]
+                                                                                    (= "article" (:page router)))}
                                    :article-tooltip    #:keechma.controller {:deps   [:entitydb :router]
                                                                              :params true}
                                    :theme      #:keechma.controller {:params true
