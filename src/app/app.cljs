@@ -4,6 +4,7 @@
             [keechma.next.controllers.subscription]
             [app.controllers.feed]
             [app.controllers.article]
+            [app.controllers.search]
             [app.controllers.article-tooltip]
             [app.controllers.theme]
             ["react-dom" :as rdom]))
@@ -26,6 +27,8 @@
                                                                      :params (fn [{:keys [router]}]
                                                                                     (= "article" (:page router)))}
                                    :article-tooltip    #:keechma.controller {:deps   [:entitydb :router]
+                                                                             :params true}
+                                   :search    #:keechma.controller {:deps   [:entitydb :router]
                                                                              :params true}
                                    :theme      #:keechma.controller {:params true
                                                                      :deps   [:entitydb :router]}}})

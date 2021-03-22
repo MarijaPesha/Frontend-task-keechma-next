@@ -11,7 +11,7 @@
             [app.ui.components.header :refer [Header]]
             [app.ui.components.footer :refer [Footer]]
             [app.ui.components.preloader :refer [Preloader]]
-            [keechma.next.toolbox.logging :as l]
+      ;;    [keechma.next.toolbox.logging :as l]
             ))
 
 (defclassified HomepageWrapper :div

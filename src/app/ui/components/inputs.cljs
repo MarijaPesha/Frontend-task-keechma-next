@@ -30,7 +30,7 @@
   (let [errors-getter (hooks/use-callback [attr] #(form/get-errors-in % attr))
         errors (use-meta-sub props controller errors-getter)]
     (when-let [errors' (get-in errors [:$errors$ :failed])]
-      (d/ul {:class "error-messages"}
+      (d/ul {:class "error-messages text-red-400 pt-4"}
         (map-indexed (fn [i e] (d/li {:key i} (get-validator-message e)))
           errors')))))
 
@@ -86,12 +86,12 @@
 
 (defmethod wrapped-input :text
   [props]
-  (d/fieldset {:class "form-group"}
-    (input (assoc props :class "form-control form-control-lg"))
+  (d/fieldset {:class "form-group flex justify-center"}
+    (input (assoc props :class "my-3 w-full shadow appearance-none border rounded py-2 px-3 text-grey-darker"))
     ($ Errors {& props})))
 
 (defmethod wrapped-input :textarea
   [props]
-  (d/fieldset {:class "form-group"}
-    (input (assoc props :class "form-control form-control-lg"))
+  (d/fieldset {:class "form-group flex justify-center mx-auto"}
+    (input (assoc props :class "my-3 w-full shadow appearance-none border rounded py-2 px-3 text-grey-darker"))
     ($ Errors {& props})))

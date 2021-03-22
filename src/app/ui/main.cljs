@@ -5,7 +5,9 @@
             [helix.dom :as d]
             [app.ui.pages.home :refer [Home]]
             [app.ui.pages.article :refer [Article]]
+            [app.ui.pages.search :refer [Search]]
             [app.ui.components.error :refer [Error404]]
+            
             [clojure.core.match :refer [match]]
             ))
 
@@ -18,6 +20,7 @@
     (match page
       "home" ($ Home)
       "article" ($ Article)
+      "search" ($ Search)
       :else ($ Error404))))
 
 (def Main (with-keechma MainRenderer))

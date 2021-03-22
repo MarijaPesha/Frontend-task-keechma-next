@@ -31,3 +31,14 @@
          "?show-blocks=all&show-fields=body,thumbnail&api-key="
          api-key)
     config))
+
+(defn search [params]
+  (println (str api-url
+            "search?show-fields=" "body"
+                  "&q='" params "'"
+                  "&api-key=" api-key))
+  (GET (str api-url
+            "search?show-fields=" "body"
+                  "&q='" params "'"
+                  "&api-key=" api-key)
+       config))

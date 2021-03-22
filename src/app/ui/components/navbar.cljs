@@ -27,6 +27,8 @@
                                :text "Education"})
                  ($ NavbarLink {:url (router/get-url props :router {:page "home" :subpage "sport"})
                                :text "Sport"})
+                ($ NavbarLink {:url (router/get-url props :router {:page "search" })
+                               :text "Search"})
                 ($ ThemeToggler))))
 
 (def Navbar (with-keechma NavbarRenderer))
