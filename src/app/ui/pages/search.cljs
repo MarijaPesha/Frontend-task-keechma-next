@@ -17,8 +17,7 @@
 
   
 (defnc SearchRenderer [props]
-  (let [search-data (use-sub props :search)
-        _ (l/pp "=======>" search-data)]
+  (let [search-data (use-sub props :search)]
     ( <>
       ($ Navbar)
      
@@ -35,13 +34,27 @@
                          :placeholder "Enter keyword"})
          (d/button {:className "my-6 absolute bg-teal-500 hover:bg-teal-700 text-white font-bold py-2 px-4 rounded"} "Search")
          )
-            
-            
-            )
-
-     ($ Footer)
+               )
+     
+         (d/div {:class "mt-16 w-2/3 mx-auto"}
+                    (map (fn [article]
+                          ;; (l/pp article)
+                           (d/div {:key       (:id article)
+                        :className "flex justify-start w-full border-b border-gray-500 py-6"
+                        :onClick   #(router/redirect! props :router {:page "article" :id (:id article)})}  
+        
+                  (d/div {:className "cursor-pointer text-left ml-4"}
+                    (d/h3 {:className "inline text-base md:text-xl border-b-4 border-teal-500"}
+                      (:webTitle article))
+                    (d/p {:className "dark:text-gray-400 text-gray-700 text-sm mt-4"}
+                      (:sectionName article)
+                      " | "
+                      (:webPublicationDate article))))
+                           )
+                         search-data))
+         (d/div {:className "fixed bottom-0 w-full"}
+                ($ Footer)
+                )
        )))
 
 (def Search (with-keechma SearchRenderer ))
-
-
