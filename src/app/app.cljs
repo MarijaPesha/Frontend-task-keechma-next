@@ -10,7 +10,7 @@
             ["react-dom" :as rdom]))
 
 (def app
-  {:keechma.subscriptions/batcher rdom/unstable_batchedUpdates,
+  {:keechma.subscriptions/batcher rdom/unstable_batchedUpdates
    :keechma/controllers           {:router     {:keechma.controller/params true
                                                 :keechma.controller/type   :keechma/router
                                                 :keechma/routes            [["" {:page "home"}] ":page" ":page/:subpage"]}
@@ -25,10 +25,10 @@
                                                                                  (select-keys router [:page :subpage])))}
                                    :article    #:keechma.controller {:deps   [:entitydb :router]
                                                                      :params (fn [{:keys [router]}]
-                                                                                    (= "article" (:page router)))}
+                                                                               (= "article" (:page router)))}
                                    :article-tooltip    #:keechma.controller {:deps   [:entitydb :router]
                                                                              :params true}
                                    :search    #:keechma.controller {:deps   [:entitydb :router]
-                                                                             :params true}
+                                                                    :params true}
                                    :theme      #:keechma.controller {:params true
                                                                      :deps   [:entitydb :router]}}})

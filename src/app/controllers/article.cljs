@@ -10,43 +10,25 @@
 
 (derive :article ::pipelines/controller)
 
-;; TASK DRY
- 
- #_(def get-pipeline
-   (pipeline! [value {:keys [deps-state* state*] :as ctrl}]
-              (api/get-article (get-in @deps-state* [:router :id]))
-              (pp/swap! state* assoc :data (get-in value [:response :content]))))
-
-
-  (def get-pipeline 
-    (pipeline! [value {:keys [deps-state* state*] :as ctrl}]
-               (api/get-article (get-in @deps-state* [:router :id]))
-               ;; (l/pp "value in ctrl" value)
-               (let [id (get-in value [:response :content :apiUrl])
-                    content (get-in value [:response :content ])]
-               ;; (l/pp "contetnt in ctrl" content)
-                 (edb/insert-named! ctrl :entitydb :article :article/current {:id id
-                                                                                   :content content })
-                 )
-               ))
+(def get-pipeline
+  (pipeline! [value {:keys [deps-state* state*] :as ctrl}]
+             (api/get-article (get-in @deps-state* [:router :id]))
+             ;; (l/pp value)
+             (let [id (get-in value [:response :content :apiUrl])
+                   content (get-in value [:response :content])
+                   authorFirstName (get-in value [:response :content :tags 0 :firstName])
+                   authorLastName (get-in value [:response :content :tags 0 :lastName])
+                   _ (println (str authorFirstName " " authorLastName))]
+               (edb/insert-named! ctrl :entitydb :article :article/current {:id id
+                                                                            :content content
+                                                                            :author (str authorFirstName " " authorLastName)}))))
 
 (def pipelines
-  {:keechma.on/start        get-pipeline
-    ;;                      (pipeline! [value {:keys [deps-state* state*] :as ctrl}]
-    ;;                      (api/get-article (get-in @deps-state* [:router :id]))
-    ;;                      (pp/swap! state* assoc :data (get-in value [:response :content])))
-    ;; keechma.on/deps-change  get-pipeline
-    ;;                      (pipeline! [value {:keys [deps-state* state*] :as ctrl}]
-    ;;                      (api/get-article (get-in @deps-state* [:router :id]))
-    ;;                      (pp/swap! state* assoc :data (get-in value [:response :content])))})
-                              })
+  {:keechma.on/start        get-pipeline})
 
 (defmethod ctrl/prep :article [ctrl]
   (pipelines/register ctrl pipelines))
 
-#_(defmethod ctrl/derive-state :article [_ state {:keys [entitydb]}]
-    (select-keys state [:data]))
-
-(defmethod ctrl/derive-state 
+(defmethod ctrl/derive-state
   :article [_ state {:keys [entitydb]}]
-    (edb/get-named entitydb :article/current))
+  (edb/get-named entitydb :article/current))

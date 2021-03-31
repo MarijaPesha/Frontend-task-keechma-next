@@ -28,7 +28,7 @@
 (defn get-article [article-id]
   (GET (str api-url
          article-id
-         "?show-blocks=all&show-fields=body,thumbnail&api-key="
+         "?show-blocks=all&show-tags=contributor&show-fields=body,thumbnail&api-key="
          api-key)
     config))
 

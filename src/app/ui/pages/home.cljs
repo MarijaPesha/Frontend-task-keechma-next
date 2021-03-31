@@ -5,13 +5,11 @@
             [keechma.next.controllers.pipelines :refer [get-promise]]
             [keechma.next.controllers.router :as router]
             [keechma.next.helix.lib :refer [defnc]]
-  ;;        [keechma.next.helix.template :refer [defnt fill-slot configure]]
             [keechma.next.helix.classified :refer [defclassified]]
             [app.ui.components.navbar :refer [Navbar]]
             [app.ui.components.header :refer [Header]]
             [app.ui.components.footer :refer [Footer]]
             [app.ui.components.preloader :refer [Preloader]]
-      ;;    [keechma.next.toolbox.logging :as l]
             ))
 
 (defclassified HomepageWrapper :div
