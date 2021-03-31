@@ -24,7 +24,11 @@
       (d/div {:class "dark:bg-gray-800 bg-gray-100 flex flex-1 flex-col items-start justify-start px-6 md:px-12 w-full md:w-3/5 mx-auto shadow-xl py-12"}
         (d/div {:className "text-2xl w-full text-center py-6 border-b-2 border-teal-500"}
           (:webTitle article-content))
-             (d/p {:className "text-sm w-full text-center cursor-pointer hover:text-teal-500 py-3 border-b-2 border-teal-500"} (str "AUTHOR: " article-author))
+             (d/p {:className "text-sm w-full text-center cursor-pointer hover:text-teal-500 py-3 border-b-2 border-teal-500"
+                   :onClick  #(router/redirect! props :router {:page ""})} 
+                  (if (= "" article-author)
+                    (str "AUTHOR: " article-author)
+                    (str "AUTHOR: Marija Pesha")))
         (d/div {:className "mt-6 text-justify"}
           (get-in article-content [:blocks :body 0 :bodyTextSummary])))
        ($ Footer)
