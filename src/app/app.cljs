@@ -5,6 +5,7 @@
             [app.controllers.feed]
             [app.controllers.article]
             [app.controllers.search]
+            [app.controllers.author]
             [app.controllers.article-tooltip]
             [app.controllers.theme]
             ["react-dom" :as rdom]))
@@ -16,7 +17,9 @@
                                                 :keechma/routes            [["" {:page "home"}] ":page" ":page/:subpage"]}
                                    :entitydb {:keechma.controller/params true
                                               :keechma.controller/type   :keechma/entitydb
-                                              :keechma.entitydb/schema   {}}
+                                              :keechma.entitydb/schema  
+                                              {:article {:entitydb/relations { :author {:entitydb.relation/path [:author]
+                                                                                         :entitydb.relation/type :author}}}}}
                                    :dataloader {:keechma.controller/params true
                                                 :keechma.controller/type   :keechma/dataloader}
                                    :feed       #:keechma.controller {:deps   [:entitydb :dataloader :router]
@@ -26,6 +29,11 @@
                                    :article    #:keechma.controller {:deps   [:entitydb :router]
                                                                      :params (fn [{:keys [router]}]
                                                                                (= "article" (:page router)))}
+                                   
+                                   :author    #:keechma.controller {:deps   [:entitydb :router]
+                                                                     :params (fn [{:keys [router]}]
+                                                                               (= "author" (:page router)))}
+                                   
                                    :article-tooltip    #:keechma.controller {:deps   [:entitydb :router]
                                                                              :params true}
                                    :search    #:keechma.controller {:deps   [:entitydb :router]

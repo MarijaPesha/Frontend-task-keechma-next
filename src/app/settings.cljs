@@ -1,4 +1,4 @@
 (ns app.settings)
 
 (def api-url "https://content.guardianapis.com/")
-(def api-key "ab67b63c-d40a-4a0a-ab36-4128491ee629")
+(def api-key "8d707afc-708b-40ca-ab25-fcebc6c3ab3c")

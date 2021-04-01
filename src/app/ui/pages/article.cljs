@@ -25,10 +25,8 @@
         (d/div {:className "text-2xl w-full text-center py-6 border-b-2 border-teal-500"}
           (:webTitle article-content))
              (d/p {:className "text-sm w-full text-center cursor-pointer hover:text-teal-500 py-3 border-b-2 border-teal-500"
-                   :onClick  #(router/redirect! props :router {:page ""})} 
-                  (if (= "" article-author)
-                    (str "AUTHOR: " article-author)
-                    (str "AUTHOR: Marija Pesha")))
+                   :onClick  #(router/redirect! props :router {:page "author" :id (:id article-author)})} 
+                  (str "Author: " (str  (:firstName article-author) " "  (:lastName article-author))))
         (d/div {:className "mt-6 text-justify"}
           (get-in article-content [:blocks :body 0 :bodyTextSummary])))
        ($ Footer)

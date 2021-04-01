@@ -13,15 +13,15 @@
 (def get-pipeline
   (pipeline! [value {:keys [deps-state* state*] :as ctrl}]
              (api/get-article (get-in @deps-state* [:router :id]))
-             ;; (l/pp value)
+              ;; (l/pp value)
              (let [id (get-in value [:response :content :apiUrl])
                    content (get-in value [:response :content])
-                   authorFirstName (get-in value [:response :content :tags 0 :firstName])
-                   authorLastName (get-in value [:response :content :tags 0 :lastName])
-                   _ (println (str authorFirstName " " authorLastName))]
+                   author (get-in value [:response :content :tags  0])]
+               (l/pp "article controller" author)
                (edb/insert-named! ctrl :entitydb :article :article/current {:id id
                                                                             :content content
-                                                                            :author (str authorFirstName " " authorLastName)}))))
+                                                                            :author author
+                                                                            }))))
 
 (def pipelines
   {:keechma.on/start        get-pipeline})
@@ -31,4 +31,4 @@
 
 (defmethod ctrl/derive-state
   :article [_ state {:keys [entitydb]}]
-  (edb/get-named entitydb :article/current))
+  (edb/get-named entitydb :article/current [(edb/include :author)]))

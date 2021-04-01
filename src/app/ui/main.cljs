@@ -7,9 +7,8 @@
             [app.ui.pages.article :refer [Article]]
             [app.ui.pages.search :refer [Search]]
             [app.ui.components.error :refer [Error404]]
-            
-            [clojure.core.match :refer [match]]
-            ))
+            [app.ui.pages.author :refer [Author]]
+            [clojure.core.match :refer [match]]))
 
 
 ;; TASK move navbar here DRY
@@ -21,6 +20,7 @@
       "home" ($ Home)
       "article" ($ Article)
       "search" ($ Search)
+      "author" ($ Author)
       :else ($ Error404))))
 
 (def Main (with-keechma MainRenderer))
