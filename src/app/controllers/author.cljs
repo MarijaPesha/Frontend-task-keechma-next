@@ -13,9 +13,13 @@
 (def get-author
   (pipeline! [value {:keys [deps-state* state*] :as ctrl}]
              (api/get-article (get-in @deps-state* [:router :id]))
-             (l/pp "author kontroler" value)
-
-             (edb/insert-named! ctrl :entitydb :author :author/current value)))
+             (let [author-map (get-in value [:response :tag])
+                   id (:webUrl author-map)
+                   author (:webTitle author-map)]
+                ;;  (l/pp "author kontroler" id)
+               (edb/insert-named! ctrl :entitydb :author :author/current {:author-map author-map 
+                                                                          :id id 
+                                                                          :author author}))))
 
 (def pipelines
   {:keechma.on/start        get-author})

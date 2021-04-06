@@ -20,11 +20,18 @@
                (l/pp "article controller" author)
                (edb/insert-named! ctrl :entitydb :article :article/current {:id id
                                                                             :content content
-                                                                            :author author
-                                                                            }))))
+                                                                            :author author}))))
 
 (def pipelines
-  {:keechma.on/start        get-pipeline})
+  {:keechma.on/start        (pipeline! [value {:keys [deps-state*]}]
+                                       (let [{:keys [entitydb router]} @deps-state*
+                                             author-id (:id router)
+                                             author (edb/get-entity entitydb :author author-id)]
+                                         (if author
+                                           (pipeline! [value ctrl]
+                                                      (edb/insert-named! ctrl :entitydb :author :author/current author)
+                                                      (pp/detached get-pipeline))
+                                           get-pipeline)))})
 
 (defmethod ctrl/prep :article [ctrl]
   (pipelines/register ctrl pipelines))
